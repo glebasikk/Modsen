@@ -5,8 +5,11 @@ const bodyParser = require('body-parser')
 const jsonParser = bodyParser.json()
 
 
-router.get("/meetings", meetings.all);
-
+router.get("/allMeetings", meetings.allMeetings);
+router.post("/oneMeeting",jsonParser, meetings.findMeetingByID);
+router.post("/delMeeting",jsonParser, meetings.delMeetingByID);
+router.post("/addMeeting",jsonParser, meetings.addMeeting);
+router.post("/updateMeeting",jsonParser, meetings.updateMeetingInfo);
 
 
 module.exports = router;

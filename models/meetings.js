@@ -13,7 +13,7 @@ const meetings = sequelize.define("meetings", {
         allowNull: false,
     },
     tag: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
     },
     date: {
