@@ -6,4 +6,6 @@ const updateMeetingDTO = (data) => ({
     place: data.place
   });
 
+
+  
 module.exports = updateMeetingDTO;
