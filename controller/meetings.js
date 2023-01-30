@@ -2,6 +2,12 @@ const meetings = require("../service/meetings");
 const findOrDelMeetingDTO = require("../dto/findOrDelMeetingDTO")
 const addMeetingDTO = require("../dto/addMeeting");
 const updateMeetingDTO = require("../dto/updateMeeting");
+const {
+    findOrDelMeetingValidation,
+    addMeetingValidation,
+    updateMeetingValidation
+} = require("../midleware/validator")
+
 
 
 class Meetings {
@@ -16,9 +22,13 @@ class Meetings {
     async findMeetingByID(req, res, next) {
         try {
             let data = findOrDelMeetingDTO(req.body)
+            let validator = await findOrDelMeetingValidation.validateAsync(data)
             let result = await meetings.findMeetingByID(data);
             return res.status(200).json(result);
         } catch (e) {
+            if(e.isJoi ==true){
+                e.status = 422
+            }
             next(e);
         }
     }
@@ -26,18 +36,26 @@ class Meetings {
     async delMeetingByID(req, res, next) {
         try {
             let data = findOrDelMeetingDTO(req.body)
+            let validator = await findOrDelMeetingValidation.validateAsync(data)
             let result = await meetings.delMeetingByID(data);
             return res.status(200).json(result);
         } catch (e) {
+            if(e.isJoi ==true){
+                e.status = 422
+            }
             next(e);
         }
     }
     async addMeeting(req, res, next) {
         try {
             let data = addMeetingDTO(req.body)
+            let validator = await addMeetingValidation.validateAsync(data)
             let result = await meetings.addMeeting(data);
             return res.status(200).json(result);
         } catch (e) {
+            if(e.isJoi ==true){
+                e.status = 422
+            }
             next(e);
         }
     }
@@ -45,9 +63,13 @@ class Meetings {
     async updateMeetingInfo(req, res, next) {
         try {
             let data = updateMeetingDTO(req.body)
+            let validator = await updateMeetingValidation.validateAsync(data)
             let result = await meetings.updateMeetingInfo(data);
             return res.status(200).json(result);
         } catch (e) {
+            if(e.isJoi ==true){
+                e.status = 422
+            }
             next(e);
         }
     }

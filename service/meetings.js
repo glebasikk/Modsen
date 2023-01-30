@@ -17,9 +17,13 @@ class Meetings {
          return result
     }
     async delMeetingByID(data) {
+        if (result == 0){
+            throw new notFound("Cannot delete this Meeting becouse meeting does not exist");
+         }
         return await  meetings.delMeetingByID(data);
     }
     async addMeeting(data) {
+        
         return await meetings.addMeeting(data);
     }
     async updateMeetingInfo(data) {
