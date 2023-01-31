@@ -2,12 +2,41 @@ const meetings = require("../repository/meetings");
 const notFound = require("../errors/NotFound");
 
 class Meetings {
-    async allMeetings() {
-         let result = await meetings.allMeetings();
-         if (result == null){
+    async allMeetings(query) {
+        if (query.page == undefined || query.page < 1) {
+            query.page = 1;
+        }
+        let limit = 2;
+        let startIndex = (query.page - 1) * limit;
+        let endIndex = query.page * limit;
+        
+        let result = await meetings.allMeetings();
+        result = result.slice(startIndex, endIndex);
+        if (result == null){
             throw new notFound("Database is empty");
          }
-         return result
+        return result
+    }
+    async allFilteredMeetings(data,query) {
+        if (query.page == undefined || query.page < 1) {
+            query.page = 1;
+        }
+        let limit = 3;
+        let startIndex = (query.page - 1) * limit;
+        let endIndex = query.page * limit;
+        delete query.page
+        let params = []
+        for (let key in query){
+            params.push(key)
+        }
+        console.log(params)
+        let result = await meetings.allFilteredMeetings(data, params);
+        result = result.slice(startIndex, endIndex);
+        
+        if (result.length == 0){
+            throw new notFound("Database is empty");
+        }
+        return result
     }
     async findMeetingByID(data) {
         let result = await meetings.findMeetingByID(data);

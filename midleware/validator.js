@@ -19,10 +19,19 @@ const updateMeetingValidation = joi.object({
         place: joi.string().required(),     
 });
 
+const filteredMeetings = joi.object({
+        id: joi.number().integer().min(1),    
+        topic: joi.string(),
+        tag: joi.string(), 
+        date: joi.date(), 
+        place: joi.string(),     
+});
+
 
   
 module.exports = {
         findOrDelMeetingValidation,
         addMeetingValidation,
-        updateMeetingValidation
+        updateMeetingValidation,
+        filteredMeetings
 }

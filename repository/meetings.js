@@ -5,6 +5,11 @@ class Meetings {
     async allMeetings() {
         return await await meetings.findAll();
     }
+    async allFilteredMeetings(data,params) {
+        return await await meetings.findAll({
+            where: data,
+            order: params});
+    }
     async findMeetingByID(data) {
         return await meetings.findOne({where: {id: data.id}});
     }

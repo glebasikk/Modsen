@@ -6,6 +6,7 @@ const jsonParser = bodyParser.json()
 
 
 router.get("/allMeetings", meetings.allMeetings);
+router.post("/filteredMeetings",jsonParser, meetings.allFilteredMeetings);
 router.post("/findMeeting",jsonParser, meetings.findMeetingByID);
 router.post("/delMeeting",jsonParser, meetings.delMeetingByID);
 router.post("/addMeeting",jsonParser, meetings.addMeeting);
