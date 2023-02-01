@@ -27,11 +27,16 @@ const filteredMeetings = joi.object({
         place: joi.string(),     
 });
 
+const registrationAndAuthValidation = joi.object({
+        username: joi.string().required(),
+        password: joi.string().required()    
+});
 
   
 module.exports = {
         findOrDelMeetingValidation,
         addMeetingValidation,
         updateMeetingValidation,
-        filteredMeetings
+        filteredMeetings,
+        registrationAndAuthValidation,
 }

@@ -1,7 +1,7 @@
 const meetings = require("../service/meetings");
 const findOrDelMeetingDTO = require("../dto/findOrDelMeetingDTO")
-const addMeetingDTO = require("../dto/addMeeting");
-const updateMeetingDTO = require("../dto/updateMeeting");
+const addMeetingDTO = require("../dto/addMeetingDTO");
+const updateMeetingDTO = require("../dto/updateMeetingDTO");
 const {
     findOrDelMeetingValidation,
     addMeetingValidation,

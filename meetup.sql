@@ -7,12 +7,24 @@ CREATE TABLE "meetings" (
 	"tag" VARCHAR(50) NOT NULL,
 	"date" DATE NOT NULL,
 	"place" VARCHAR(50) NOT NULL
-) WITH (
-  OIDS=FALSE
 );
 
 
+CREATE TABLE "users" (
+	id 				 BIGSERIAL NOT NULL PRIMARY KEY ,
+	username	 			varchar(50) 	NOT NULL,
+	password 	 		varchar(255) 	NOT NULL,
+	role 				varchar(50) 	NOT NULL
+	
+);
 
+CREATE TABLE "guests" (
+	id 				 BIGSERIAL NOT NULL PRIMARY KEY ,
+	user_id	 			INTEGER NOT NULL,
+	meeting_id 	 		INTEGER	 NOT NULL,
+	FOREIGN KEY (userId) REFERENCES users (id),
+	FOREIGN KEY (meetingId) REFERENCES meetings (id)
+);
 
 
 
