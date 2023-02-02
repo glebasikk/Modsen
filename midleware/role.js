@@ -2,6 +2,8 @@ const { secret } = require("../config");
 const jwt = require("jsonwebtoken");
 const Forbidden = require("../errors/Forbidden");
 
+
+
 module.exports = function (role) {
     return function (req, res, next) {
         try {
