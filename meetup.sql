@@ -22,8 +22,8 @@ CREATE TABLE "guests" (
 	id 				 BIGSERIAL NOT NULL PRIMARY KEY ,
 	user_id	 			INTEGER NOT NULL,
 	meeting_id 	 		INTEGER	 NOT NULL,
-	FOREIGN KEY (userId) REFERENCES users (id),
-	FOREIGN KEY (meetingId) REFERENCES meetings (id)
+	FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (meeting_id) REFERENCES meetings (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
