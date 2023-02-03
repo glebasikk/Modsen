@@ -1,7 +1,7 @@
-const meetings = require("../repository/meetings");
+const meeting = require("../repository/meetings");
 const notFound = require("../errors/NotFound");
 
-class Meetings {
+class Meeting {
     async allMeetings(query) {
         if (query.page == undefined || query.page < 1) {
             query.page = 1;
@@ -10,7 +10,7 @@ class Meetings {
         let startIndex = (query.page - 1) * limit;
         let endIndex = query.page * limit;
         
-        let result = await meetings.allMeetings();
+        let result = await meeting.allMeetings();
         result = result.slice(startIndex, endIndex);
         if (result == null){
             throw new notFound("Database is empty");
@@ -30,7 +30,7 @@ class Meetings {
             params.push(key)
         }
         console.log(params)
-        let result = await meetings.allFilteredMeetings(data, params);
+        let result = await meeting.allFilteredMeetings(data, params);
         result = result.slice(startIndex, endIndex);
         
         if (result.length == 0){
@@ -39,24 +39,28 @@ class Meetings {
         return result
     }
     async findMeetingByID(data) {
+        
         let result = await meetings.findMeetingByID(data);
+        
          if (result == null){
             throw new notFound("Meeting with this id does not exist");
          }
+         
          return result
     }
     async delMeetingByID(data) {
-        if (result == 0){
-            throw new notFound("Cannot delete this Meeting becouse meeting does not exist");
+        let result = await meeting.findMeetingByID(data);
+        if (result == null){
+            throw new notFound("Cannot delete this Meeting becouse this meeting does not exist");
          }
-        return await  meetings.delMeetingByID(data);
+        return await  meeting.delMeetingByID(data);
     }
     async addMeeting(data) {
         
-        return await meetings.addMeeting(data);
+        return await meeting.addMeeting(data);
     }
     async updateMeetingInfo(data) {
-        let result = await meetings.updateMeetingInfo(data);
+        let result = await meeting.updateMeetingInfo(data);
          if (result == null){
             throw new notFound("Meeting with this id does not exist");
          }
@@ -65,4 +69,4 @@ class Meetings {
     
 }
 
-module.exports = new Meetings();
+module.exports = new Meeting();

@@ -1,13 +1,18 @@
 const guest = require("../repository/guests");
-const PreconditionFailed = require("../errors/PreconditionFailed")
+const meeting = require("../repository/meetings");
+const NotFound = require("../errors/NotFound");
+const BadRequest = require("../errors/BadRequest");
 
 class Guest {
     async addGuest(data) {
         let check = await guest.findGuest(data)
         if (check != null){
-            throw new PreconditionFailed("user exist");
+            throw new BadRequest("user already added to this meeting");
         }
-        console.log(check)
+        check = await meeting.findMeetingByID(data)
+        if (check == null){
+            throw new NotFound("Meeting with this id does not exist");
+        }
         return await guest.addGuest(data);
     }
 }

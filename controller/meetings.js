@@ -1,7 +1,8 @@
-const meetings = require("../service/meetings");
+const meeting = require("../service/meetings");
 const findOrDelMeetingDTO = require("../dto/findOrDelMeetingDTO")
 const addMeetingDTO = require("../dto/addMeetingDTO");
 const updateMeetingDTO = require("../dto/updateMeetingDTO");
+const Response = require("../help/Response");
 const {
     findOrDelMeetingValidation,
     addMeetingValidation,
@@ -11,11 +12,11 @@ const {
 
 
 
-class Meetings {
+class Meeting {
     async allMeetings(req, res, next) {
         try {
             let query = req.query
-            let result = await meetings.allMeetings(query);
+            let result = await meeting.allMeetings(query);
             return res.status(200).json(result);
         } catch (e) {
             next(e);
@@ -26,7 +27,7 @@ class Meetings {
             let query = req.query
             let data = req.body
             let validator = await filteredMeetings.validateAsync(data)
-            let result = await meetings.allFilteredMeetings(data,query);
+            let result = await meeting.allFilteredMeetings(data,query);
             return res.status(200).json(result);
         } catch (e) {
             if(e.isJoi == true){
@@ -39,7 +40,7 @@ class Meetings {
         try {
             let data = findOrDelMeetingDTO(req.body)
             let validator = await findOrDelMeetingValidation.validateAsync(data)
-            let result = await meetings.findMeetingByID(data);
+            let result = await meeting.findMeetingByID(data);
             return res.status(200).json(result);
         } catch (e) {
             if(e.isJoi ==true){
@@ -53,8 +54,8 @@ class Meetings {
         try {
             let data = findOrDelMeetingDTO(req.body)
             let validator = await findOrDelMeetingValidation.validateAsync(data)
-            let result = await meetings.delMeetingByID(data);
-            return res.status(200).json(result);
+            let result = await meeting.delMeetingByID(data);
+            return res.json(new Response("200", "Meeting deleted"));
         } catch (e) {
             if(e.isJoi ==true){
                 e.status = 422
@@ -66,8 +67,8 @@ class Meetings {
         try {
             let data = addMeetingDTO(req.body)
             let validator = await addMeetingValidation.validateAsync(data)
-            let result = await meetings.addMeeting(data);
-            return res.status(200).json(result);
+            let result = await meeting.addMeeting(data);
+            return res.json(new Response("200", "Meeting added"));
         } catch (e) {
             if(e.isJoi ==true){
                 e.status = 422
@@ -80,8 +81,8 @@ class Meetings {
         try {
             let data = updateMeetingDTO(req.body)
             let validator = await updateMeetingValidation.validateAsync(data)
-            let result = await meetings.updateMeetingInfo(data);
-            return res.status(200).json(result);
+            let result = await meeting.updateMeetingInfo(data);
+            return res.json(new Response("200", "Meeting updated"));
         } catch (e) {
             if(e.isJoi ==true){
                 e.status = 422
@@ -91,4 +92,4 @@ class Meetings {
     }
 }
 
-module.exports = new Meetings();
+module.exports = new Meeting();

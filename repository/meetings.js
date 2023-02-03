@@ -1,23 +1,22 @@
+const meeting = require("../models/meetings");
 
-const meetings = require("../models/meetings");
-
-class Meetings {
-    async allMeetings() {
-        return await await meetings.findAll();
+class Meeting {
+    async allmeetings() {
+        return await await meeting.findAll();
     }
-    async allFilteredMeetings(data,params) {
-        return await await meetings.findAll({
+    async allFilteredmeetings(data,params) {
+        return await await meeting.findAll({
             where: data,
             order: params});
     }
     async findMeetingByID(data) {
-        return await meetings.findOne({where: {id: data.id}});
+        return await meeting.findOne({where: {id: data.id}});
     }
     async delMeetingByID(data) {
-        return await meetings.destroy({where: {id: data.id}});
+        return await meeting.destroy({where: {id: data.id}});
     }
     async addMeeting(data) {
-        return await meetings.create( 
+        return await meeting.create( 
             {
                 topic: data.topic,
                 tag: data.tag,
@@ -26,8 +25,7 @@ class Meetings {
             });
     }
     async updateMeetingInfo(data) {
-        console.log(data)
-        return await meetings.update(
+        return await meeting.update(
             {
                 topic: data.topic,
                 tag: data.tag,
@@ -39,4 +37,4 @@ class Meetings {
     }
 }
 
-module.exports = new Meetings();
+module.exports = new Meeting();
