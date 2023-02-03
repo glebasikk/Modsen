@@ -6,7 +6,4 @@ async function start() {
     });
    
 }
-
-
-
 start();
