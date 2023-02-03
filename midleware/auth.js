@@ -1,21 +1,33 @@
 const { secret } = require("../config");
 const jwt = require("jsonwebtoken");
-const Forbidden = require("../errors/Forbidden");
+const Unauthorized = require("../errors/Forbidden");
 
-module.exports = function (req, res, next) {
-    try {
-        const token = req.headers.authorization.split(" ")[1];
-        if (!token) {
-            throw new Forbidden("user not authorized");
+
+
+module.exports = function (role) {
+    return function (req, res, next) {
+        try {
+            let token = req.headers.authorization
+            if (!token) {
+                throw new Unauthorized("access denied");
+            }
+            token = token.split(" ")[1];
+            const data = jwt.verify(token, secret);
+            let hasRole = false;
+            req.body.userId = data.id
+            if (data.type != "Access"){
+                throw new Unauthorized("Wrong token type")
+            }
+            if (role.indexOf(data.role,0) != -1) {
+                hasRole = true;
+            }
+            if (hasRole === false) {
+                throw new Unauthorized("access denied");
+            }
+            next();
+        } catch (e) {
+            console.log(e);
+            next(e);
         }
-        const decodedData = jwt.verify(token, secret);
-        req.body.token = token;
-        req.body.userId = decodedData.id;
-        req.body.email = decodedData.email;
-        req.body.role = decodedData.role;
-        next();
-    } catch (e) {
-        console.log(e);
-        return res.status(400).json({ message: "user not authorized" });
-    }
+    };
 };

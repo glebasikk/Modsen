@@ -26,12 +26,23 @@ const filteredMeetings = joi.object({
         date: joi.date(), 
         place: joi.string(),     
 });
+const addGuestValidator = joi.object({
+        id: joi.number().required(),
+        userId: joi.number().required(),
+        meetingId: joi.number().required(),   
+});
 
 const registrationAndAuthValidation = joi.object({
         username: joi.string().required(),
         password: joi.string().required()    
 });
 
+const refreshTokenValidator = joi.object({
+        userId: joi.number().required(),
+        username: joi.string().required(),
+        type: joi.string().required(),
+        role: joi.string().required(),
+});
   
 module.exports = {
         findOrDelMeetingValidation,
@@ -39,4 +50,6 @@ module.exports = {
         updateMeetingValidation,
         filteredMeetings,
         registrationAndAuthValidation,
+        addGuestValidator,
+        refreshTokenValidator
 }
