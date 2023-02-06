@@ -9,6 +9,33 @@ const authMidlewareRefresh = require("../midleware/authRefresh");
 const jsonParser = bodyParser.json()
 
 
+/**
+ * @swagger
+ * /allMeetings?page=3:
+ *   get:
+ *     description: Get allMeetings on page 2
+ *     responses:
+ *       200:
+ *         description: Return all meetings on page 2
+ *       404:
+ *         description: There are no meetings on this page
+ * /filteredMeetings:
+ *   post:
+ *     description: Get all books
+ *     parameters:
+ *      - id: 5
+ *        description: title of the book
+ *        in: formData
+ *        required: true
+ *        type: string
+ *     responses:
+ *       201:
+ *         description: Created
+ */
+
+
+
+
 router.get("/allMeetings", meetings.allMeetings);
 router.post("/filteredMeetings",jsonParser, meetings.allFilteredMeetings);
 router.post("/findMeeting", meetings.findMeetingByID);

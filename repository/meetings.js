@@ -1,7 +1,7 @@
 const meeting = require("../models/meetings");
 
 class Meeting {
-    async allmeetings() {
+    async allMeetings() {
         return await await meeting.findAll();
     }
     async allFilteredmeetings(data,params) {

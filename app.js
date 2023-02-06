@@ -1,6 +1,21 @@
 const express = require("express");
 const router = require("./routes/router");
 const app = express();
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUI = require('swagger-ui-express');
+
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      title: "Library API",
+      version: '1.0.0',
+    },
+  },
+  apis: ["./routes/router.js"],
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

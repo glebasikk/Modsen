@@ -12,9 +12,9 @@ class Meeting {
         
         let result = await meeting.allMeetings();
         result = result.slice(startIndex, endIndex);
-        if (result == null){
-            throw new notFound("Database is empty");
-         }
+        if (result.length == 0){
+            throw new notFound("There are no meetings on this page");
+        }
         return result
     }
     async allFilteredMeetings(data,query) {
