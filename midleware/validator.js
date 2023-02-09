@@ -19,6 +19,7 @@ const updateMeetingValidation = joi.object({
         place: joi.string().required(),     
 });
 
+
 const filteredMeetings = joi.object({
         id: joi.number().integer().min(1),    
         topic: joi.string(),

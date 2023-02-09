@@ -9,7 +9,7 @@ class TokenGenerator {
             type: "Access"
         };
         
-        return jwt.sign(payload, secret, { expiresIn: "24h" });
+        return jwt.sign(payload, secret, { expiresIn: "24000h" });
     };
     
     
@@ -20,7 +20,7 @@ class TokenGenerator {
             role: data.dataValues.role,
             type: "Refresh"
         };
-        return jwt.sign(payload, secret, { expiresIn: "72h" });
+        return jwt.sign(payload, secret, { expiresIn: "72000h" });
     };
 }
 module.exports = new TokenGenerator();

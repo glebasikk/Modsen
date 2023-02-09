@@ -7,6 +7,7 @@ module.exports = function (role) {
     return function (req, res, next) {
         try {
             let token = req.headers.authorization
+            console.log(token)
             if (!token) {
                 throw new Unauthorized("access denied");
             }

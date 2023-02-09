@@ -1,7 +1,7 @@
 const { dialect,host,port } = require("../config");
 const Sequelize = require("sequelize");
 
-const sequelize = new Sequelize("meeting", "postgres", "12345", {
+const sequelize = new Sequelize("meetings", "postgres", "12345", {
     dialect: dialect,
     host: host,
     port: port,

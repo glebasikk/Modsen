@@ -7,7 +7,6 @@ class Meeting {
     async addGuest(req, res, next) {
         try {
             let data = addGuestDTO(req.body)
-            console.log(data)
             let validator = await addGuestValidator.validateAsync(data)
             validator
             let result = await guest.addGuest(data);
