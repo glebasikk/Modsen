@@ -1,5 +1,6 @@
 const userRepo = require("../repository/users");
 const tokenGenerator = require("../midleware/tokenGenerator")
+const session = require("../repository/sessions");
 const bcrypt = require("bcrypt");
 const NotFound = require("../errors/NotFound");
 const Unauthorized = require("../errors/Unauthorized");
@@ -24,8 +25,13 @@ class Auth {
         if (!validPassword) {
             throw new Unauthorized("Incorrect password");
         }
+        data.userId = user.dataValues.id
         const token = tokenGenerator.generateToken(user);
         const refreshToken = tokenGenerator.generateRefreshToken(user)
+        data.token = token
+        data.refreshToken = refreshToken
+        await session.delSession(data)
+        await session.addSession(data)
         return { token, refreshToken};
     }
     async refreshToken(data) {

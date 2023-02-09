@@ -29,18 +29,17 @@ class Meeting {
         for (let key in query){
             params.push(key)
         }
-        console.log(params)
-        let result = await meeting.allFilteredMeetings(data, params);
+        let result = await meeting.allFilteredmeetings(data, params);
         result = result.slice(startIndex, endIndex);
         
         if (result.length == 0){
-            throw new notFound("Database is empty");
+            throw new notFound("Meeting with this params does not exist");
         }
         return result
     }
     async findMeetingByID(data) {
         
-        let result = await meetings.findMeetingByID(data);
+        let result = await meeting.findMeetingByID(data);
         
          if (result == null){
             throw new notFound("Meeting with this id does not exist");
@@ -56,7 +55,6 @@ class Meeting {
         return await  meeting.delMeetingByID(data);
     }
     async addMeeting(data) {
-        
         return await meeting.addMeeting(data);
     }
     async updateMeetingInfo(data) {
