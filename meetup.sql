@@ -19,14 +19,6 @@ CREATE TABLE "users" (
 );
 
 
-CREATE TABLE "sessions" (
-	id 				 BIGSERIAL NOT NULL PRIMARY KEY ,
-	user_id	 			INTEGER NOT NULL,
-	token	 			varchar(50) 	NOT NULL,
-	rtoken 	 		varchar(255) 	NOT NULL
-	
-);
-
 CREATE TABLE "guests" (
 	id 				 BIGSERIAL NOT NULL PRIMARY KEY ,
 	user_id	 			INTEGER NOT NULL,
