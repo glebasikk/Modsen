@@ -1,5 +1,4 @@
 const { secret } = require("../config");
-const session = require("../repository/sessions");
 const jwt = require("jsonwebtoken");
 const Unauthorized = require("../errors/Forbidden");
 

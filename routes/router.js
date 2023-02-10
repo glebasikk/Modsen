@@ -134,7 +134,7 @@ const jsonParser = bodyParser.json()
 
 /**
 * @openapi
-* /allMeetings?page=3:
+* /allMeetings?page=2:
 *  get:
 *     tags:
 *     - Server
@@ -230,7 +230,7 @@ const jsonParser = bodyParser.json()
 *  post:
 *     tags:
 *     - User
-*     summary: user authorization
+*     summary: user authorization (admin account ADMIN Password ADMIN)
 *     requestBody:
 *      required: true
 *      content:
